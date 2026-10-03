@@ -1,0 +1,49 @@
+{
+  "artefakt_id": "A01",
+  "projekt_id": "MA-20261003-001",
+  "version": "0.1.0",
+  "datum": "2026-10-03",
+  "autor": "[Verantwortliche Person eintragen.]",
+  "status": "Entwurf",
+  "eingaben": [],
+  "quellen": [],
+  "offene_punkte": [
+    "Beispielvorlage vollständig bearbeiten; fehlende Nachweise sind keine Freigabe."
+  ],
+  "gesperrt": false,
+  "sperrgrund": "",
+  "beispiel": true,
+  "inhalt": {
+    "kernfrage": "[Eine klar eingegrenzte medizinische Kernfrage eintragen.]",
+    "nutzen": "[Welchen belegbaren Lerngewinn hat die Zielgruppe?]",
+    "zielgruppe": "[Erwachsene deutschsprachige Zuschauer; Zielgruppe konkretisieren.]",
+    "scope": [
+      "[Ein begrenztes Thema und den Gültigkeitsbereich definieren.]"
+    ],
+    "ausschluesse": [
+      "Keine individuelle Diagnose, Therapieentscheidung oder Dosierungsanweisung."
+    ],
+    "suchfragen": [
+      "[Primäre Suchfrage zu Population, Vergleich und Endpunkt eintragen.]"
+    ],
+    "format": {
+      "plattform": "youtube",
+      "dauer_sekunden": 58,
+      "seitenverhaeltnis": "9:16",
+      "sprache": "de-DE",
+      "stil": "[Redaktionelles Format festlegen.]"
+    },
+    "ressourcen": {
+      "zeitbudget_stunden": null,
+      "budget_eur": null,
+      "werkzeuge": [],
+      "verantwortliche": [],
+      "grenzen": [
+        "Ressourcen noch nicht bestätigt."
+      ]
+    },
+    "offene_entscheidungen": [
+      "Thema, Laufzeit, Zielgruppe und Verantwortliche bestätigen."
+    ]
+  }
+}

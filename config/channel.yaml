@@ -1,0 +1,143 @@
+# MedizinAnders V1. Änderungen invalidieren die an diese Regeln gebundenen Freigaben.
+kanal: MedizinAnders
+sprache: de-DE
+profil_id: MA-SHORT-58-v1.0
+format:
+  dauer_sekunden: 58.0
+  framezahl: 1740
+  seitenverhaeltnis: '9:16'
+  gesprochene_woerter_min: 100
+  gesprochene_woerter_max: 130
+  cta_anzahl: 1
+timeline:
+  - {funktion: Hook, start: 0.0, ende: 3.0}
+  - {funktion: Open Loop, start: 3.0, ende: 8.0}
+  - {funktion: Payload, start: 8.0, ende: 41.0}
+  - {funktion: Verdichtung, start: 41.0, ende: 48.0}
+  - {funktion: CTA, start: 48.0, ende: 52.0}
+  - {funktion: Ausklang, start: 52.0, ende: 54.0}
+  - {funktion: Disclaimer, start: 54.0, ende: 58.0}
+hook_schnitt:
+  zeit_sekunden: 3.0
+  uebergang: harter Schnitt
+video:
+  breite: 1080
+  hoehe: 1920
+  sar: '1:1'
+  fps: '30/1'
+  cfr: true
+  progressiv: true
+  pixelformat: yuv420p
+  dynamik: SDR
+  farbprimaries: bt709
+  transfer: bt709
+  matrix: bt709
+  codec: h264
+  codec_bezeichnung: H.264/AVC
+  profil: High
+  level: '4.1'
+  bitrate_ziel_bit_s: 10000000
+  bitrate_max_bit_s: 16000000
+  gop_geschlossen: true
+  gop_max_frames: 60
+  b_frames: 2
+  container: mp4
+  fast_start: true
+audio:
+  codec: aac
+  profil: LC
+  samplerate_hz: 48000
+  kanaele: 2
+  kanalbezeichnung: Stereo
+  bitrate_ziel_bit_s: 384000
+  loudness_ziel_lufs_i: -14.0
+  loudness_min_lufs_i: -15.0
+  loudness_max_lufs_i: -13.0
+  true_peak_max_dbtp: -1.5
+  stimme: ruhige erwachsene deutsche Erzählstimme
+  fremde_stimme_imitieren: false
+  aerztliche_autoritaet_spielen: false
+  musik:
+    instrumental: true
+    gesang: false
+    dramatische_stings: false
+    abstand_zur_stimme_ziel_db: 18.0
+    abstand_zur_stimme_min_db: 15.0
+    abstand_zur_stimme_max_db: 21.0
+    getrennte_spuren_erforderlich_fuer_messung: true
+    fallback_bei_nicht_messbarem_abstand: Musik entfernen
+untertitel:
+  sprache: Deutsch
+  format: SRT
+  encoding: UTF-8
+  eingebrannt_zusaetzlich: true
+  schrift: Montserrat Bold
+  schriftgroesse_px: 52
+  farbe: weiss
+  zeilen_max: 2
+  zeichen_pro_zeile_max: 28
+  pixelbreite_hat_vorrang: true
+  zeichen_pro_sekunde_max: 18.0
+  cue_min_sekunden: 0.8
+  cue_max_sekunden: 4.0
+  sync_max_ms: 100
+  semantische_umbrueche: true
+  negation_zahl_einheit_nicht_sinnentstellend_trennen: true
+  x_min: 90
+  x_max: 930
+  y_min: 192
+  y_max: 1536
+  unterkante_y: 1520
+  quellenhinweis_y_min: 1200
+  quellenhinweis_y_max: 1320
+  menschliche_sichtpruefung_pflicht: true
+disclaimer:
+  start: 54.0
+  ende: 58.0
+  text: 'Journalistischer Analyse-Content. Kein medizinischer Rat.'
+  hintergrund: schwarz
+  ausschliesslich_disclaimer: true
+  voiceover: false
+  musik: false
+governance:
+  human_gates: [G0, G1, G2, G3, G4, G5a, G5b]
+  agenten_duerfen_human_gate_setzen: false
+  medizinischer_review:
+    ausloeser: [Wirksamkeit, Schaden, Diagnostik, Therapie, Dosierung, individuelle Krankheitsprognose]
+    bedingung: Ein Missverständnis kann Gesundheitsentscheidungen beeinflussen.
+    echte_fachperson_erforderlich: true
+    claimreview_bindung: [A01, A02, A03]
+    produktionsreview_bindung: [A01, A02, A03, A04, A05, A06]
+    produktionsreview_vor_g3: bei relevanter Episode erforderlich
+  juristischer_review:
+    ausloeser: [identifizierbare Personen oder Unternehmen, schwerwiegende Vorwürfe, Bildrechte, Musikrechte, Stimmrechte, Zitatrecht, Datenschutz]
+    offene_frage_blockiert_claim: true
+    zentraler_claim_blockiert_episode: true
+    claimreview_bindung: [A01, A02, A03]
+    produktionsreview_bindung: [A01, A02, A03, A04, A05, A06]
+    produktionsreview_vor_g3: bei relevanter Episode erforderlich
+  zugriff_auf_originalquelle_erforderlich: true
+  nicht_zugaengliche_quelle: nicht_geprueft
+  erlaubte_claim_status: [BESTÄTIGT, TEILWEISE, WIDERLEGT, UNBEWIESEN]
+  erlaubte_einsatzwerte: [ja, nur_mit_einschraenkung, nein]
+  qa_ergebnisse: [freigabefaehig, nacharbeit_erforderlich, pruefung_unvollstaendig]
+  offene_k0_max: 0
+  offene_k1_max: 0
+  fehlende_anwendbare_pflichtpruefungen_max: 0
+  patientendaten: verboten
+  ki_illustration_als_echter_beweis: verboten
+  invideo: manuell
+  youtube_upload: manuell und erst nach G5a ausschließlich privat
+  youtube_veroeffentlichung: manuell und erst nach G5b
+  automatische_neuencodierung: false
+  freier_artefaktimport: [A01, A02, A03, A04, A05, A06]
+  technischer_fachnachweis:
+    eigener_nachweis_je_nicht_geprueft_punkt: true
+    gemessene_fehler_ueberschreibbar: false
+    unabhaengige_offene_k0_k1_ueberschreibbar: false
+analytics:
+  fehlender_wert: null
+  begruendung_bei_fehlendem_wert: erforderlich
+  beobachtung_und_hypothese_trennen: true
+  naechste_tests_pro_auswertung: 1
+  regelwechsel_nach_einem_video: false

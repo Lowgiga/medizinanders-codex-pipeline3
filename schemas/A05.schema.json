@@ -1,0 +1,475 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://medizinanders.local/schemas/A05.schema.json",
+  "title": "MedizinAnders A05 – Skript und Publikationstexte",
+  "description": "Self-contained JSON Schema 2020-12. Strukturelle Validierung ersetzt weder Quellenprüfung noch externe Gate-Freigabe.",
+  "type": "object",
+  "properties": {
+    "artefakt_id": {
+      "const": "A05"
+    },
+    "projekt_id": {
+      "type": "string",
+      "pattern": "^MA-[0-9]{8}-[0-9]{3}$"
+    },
+    "version": {
+      "$ref": "#/$defs/semver"
+    },
+    "datum": {
+      "$ref": "#/$defs/iso_datum"
+    },
+    "autor": {
+      "$ref": "#/$defs/text"
+    },
+    "status": {
+      "enum": [
+        "Entwurf",
+        "geprüft",
+        "freigegeben",
+        "produziert",
+        "veröffentlicht"
+      ],
+      "description": "Historischer Dateistatus; keine wirksame Gate-Freigabe oder Freigabevererbung."
+    },
+    "eingaben": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/eingabe"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "quellen": {
+      "$ref": "#/$defs/id_liste"
+    },
+    "offene_punkte": {
+      "$ref": "#/$defs/text_liste"
+    },
+    "gesperrt": {
+      "type": "boolean"
+    },
+    "sperrgrund": {
+      "type": "string"
+    },
+    "beispiel": {
+      "type": "boolean"
+    },
+    "inhalt": {
+      "type": "object",
+      "properties": {
+        "saetze": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/satz"
+          },
+          "minItems": 1
+        },
+        "sprechertext": {
+          "$ref": "#/$defs/text"
+        },
+        "wortzahl": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "untertitel_basis": {
+          "$ref": "#/$defs/text"
+        },
+        "aussprache": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "begriff": {
+                "$ref": "#/$defs/text"
+              },
+              "aussprache": {
+                "$ref": "#/$defs/text"
+              }
+            },
+            "required": [
+              "begriff",
+              "aussprache"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        },
+        "overlays": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/overlay"
+          },
+          "minItems": 0
+        },
+        "titel": {
+          "$ref": "#/$defs/publikationsfeld"
+        },
+        "thumbnail": {
+          "$ref": "#/$defs/publikationsfeld"
+        },
+        "beschreibung": {
+          "$ref": "#/$defs/publikationsfeld"
+        },
+        "quellenangaben": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "quelle_id": {
+                "$ref": "#/$defs/identifikator"
+              },
+              "fundstelle": {
+                "$ref": "#/$defs/text"
+              },
+              "text": {
+                "$ref": "#/$defs/text"
+              },
+              "url": {
+                "$ref": "#/$defs/url_oder_leer"
+              }
+            },
+            "required": [
+              "quelle_id",
+              "fundstelle",
+              "text",
+              "url"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        },
+        "cta": {
+          "$ref": "#/$defs/publikationsfeld"
+        },
+        "disclaimer": {
+          "const": "Journalistischer Analyse-Content. Kein medizinischer Rat."
+        },
+        "hashtags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 2,
+            "pattern": "^#[^\\s#]+$"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "saetze",
+        "sprechertext",
+        "wortzahl",
+        "untertitel_basis",
+        "aussprache",
+        "overlays",
+        "titel",
+        "thumbnail",
+        "beschreibung",
+        "quellenangaben",
+        "cta",
+        "disclaimer",
+        "hashtags"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "artefakt_id",
+    "projekt_id",
+    "version",
+    "datum",
+    "autor",
+    "status",
+    "eingaben",
+    "quellen",
+    "offene_punkte",
+    "gesperrt",
+    "sperrgrund",
+    "beispiel",
+    "inhalt"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "gesperrt": {
+            "const": true
+          }
+        },
+        "required": [
+          "gesperrt"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sperrgrund": {
+            "$ref": "#/$defs/text"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "sperrgrund": {
+            "const": ""
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "eingabe": {
+      "type": "object",
+      "properties": {
+        "artefakt_id": {
+          "type": "string",
+          "pattern": "^A(?:0[1-9]|1[0-2])$"
+        },
+        "version": {
+          "$ref": "#/$defs/semver"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "required": [
+        "artefakt_id",
+        "version",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "id_liste": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/identifikator"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "identifikator": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "iso_datum": {
+      "type": "string",
+      "anyOf": [
+        {
+          "format": "date",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        {
+          "format": "date-time",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T"
+        }
+      ],
+      "description": "ISO-8601-Datum oder RFC-3339-Zeitpunkt mit Zeitzone."
+    },
+    "overlay": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "$ref": "#/$defs/text"
+        },
+        "faktisch": {
+          "type": "boolean"
+        },
+        "claim_ids": {
+          "$ref": "#/$defs/id_liste"
+        },
+        "einschraenkung": {
+          "type": "string",
+          "description": "Tatsächlich wahrnehmbare Einschränkung; ersetzt keine Prüfung des Sprechertexts."
+        },
+        "start": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 54
+        },
+        "ende": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 54
+        }
+      },
+      "required": [
+        "text",
+        "faktisch",
+        "claim_ids",
+        "start",
+        "ende"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "faktisch": {
+                "const": true
+              }
+            },
+            "required": [
+              "faktisch"
+            ]
+          },
+          "then": {
+            "properties": {
+              "claim_ids": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "publikationsfeld": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "$ref": "#/$defs/text"
+        },
+        "faktisch": {
+          "type": "boolean"
+        },
+        "claim_ids": {
+          "$ref": "#/$defs/id_liste"
+        },
+        "einschraenkung": {
+          "type": "string",
+          "description": "Tatsächlich wahrnehmbare Einschränkung; ersetzt keine Prüfung des Sprechertexts."
+        }
+      },
+      "required": [
+        "text",
+        "faktisch",
+        "claim_ids"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "faktisch": {
+                "const": true
+              }
+            },
+            "required": [
+              "faktisch"
+            ]
+          },
+          "then": {
+            "properties": {
+              "claim_ids": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "satz": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "$ref": "#/$defs/text"
+        },
+        "faktisch": {
+          "type": "boolean"
+        },
+        "claim_ids": {
+          "$ref": "#/$defs/id_liste"
+        },
+        "einschraenkung": {
+          "type": "string",
+          "description": "Tatsächlich wahrnehmbare Einschränkung; ersetzt keine Prüfung des Sprechertexts."
+        },
+        "satz_id": {
+          "$ref": "#/$defs/identifikator"
+        },
+        "funktion": {
+          "enum": [
+            "hook",
+            "open_loop",
+            "payload",
+            "verdichtung",
+            "ausklang",
+            "kontext",
+            "kernfrage",
+            "erklaerung",
+            "beleg",
+            "einschraenkung",
+            "gegenbeleg",
+            "uebergang",
+            "fazit",
+            "cta",
+            "disclaimer"
+          ]
+        }
+      },
+      "required": [
+        "text",
+        "faktisch",
+        "claim_ids",
+        "satz_id",
+        "funktion"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "faktisch": {
+                "const": true
+              }
+            },
+            "required": [
+              "faktisch"
+            ]
+          },
+          "then": {
+            "properties": {
+              "claim_ids": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 der tatsächlichen Datei, 64 kleingeschriebene Hexzeichen."
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "text_liste": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/text"
+      },
+      "minItems": 0
+    },
+    "url_oder_leer": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://"
+        },
+        {
+          "const": ""
+        }
+      ]
+    }
+  }
+}

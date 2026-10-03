@@ -1,0 +1,498 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://medizinanders.local/schemas/A02.schema.json",
+  "title": "MedizinAnders A02 – Recherche und Originalquellen",
+  "description": "Self-contained JSON Schema 2020-12. Strukturelle Validierung ersetzt weder Quellenprüfung noch externe Gate-Freigabe.",
+  "type": "object",
+  "properties": {
+    "artefakt_id": {
+      "const": "A02"
+    },
+    "projekt_id": {
+      "type": "string",
+      "pattern": "^MA-[0-9]{8}-[0-9]{3}$"
+    },
+    "version": {
+      "$ref": "#/$defs/semver"
+    },
+    "datum": {
+      "$ref": "#/$defs/iso_datum"
+    },
+    "autor": {
+      "$ref": "#/$defs/text"
+    },
+    "status": {
+      "enum": [
+        "Entwurf",
+        "geprüft",
+        "freigegeben",
+        "produziert",
+        "veröffentlicht"
+      ],
+      "description": "Historischer Dateistatus; keine wirksame Gate-Freigabe oder Freigabevererbung."
+    },
+    "eingaben": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/eingabe"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "quellen": {
+      "$ref": "#/$defs/id_liste"
+    },
+    "offene_punkte": {
+      "$ref": "#/$defs/text_liste"
+    },
+    "gesperrt": {
+      "type": "boolean"
+    },
+    "sperrgrund": {
+      "type": "string"
+    },
+    "beispiel": {
+      "type": "boolean"
+    },
+    "inhalt": {
+      "type": "object",
+      "properties": {
+        "suchprotokoll": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "suchfrage": {
+                "$ref": "#/$defs/text"
+              },
+              "werkzeug": {
+                "$ref": "#/$defs/text"
+              },
+              "zeitpunkt": {
+                "$ref": "#/$defs/iso_datum_oder_null"
+              },
+              "ergebnis": {
+                "$ref": "#/$defs/text"
+              },
+              "gegenbelege_gesucht": {
+                "type": "boolean"
+              },
+              "retraktionen_geprueft": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "suchfrage",
+              "werkzeug",
+              "zeitpunkt",
+              "ergebnis",
+              "gegenbelege_gesucht",
+              "retraktionen_geprueft"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        },
+        "originalquellen": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/quelle"
+          },
+          "minItems": 0
+        },
+        "gegenbelege": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/beleg"
+          },
+          "minItems": 0
+        },
+        "unsicherheiten": {
+          "$ref": "#/$defs/text_liste"
+        }
+      },
+      "required": [
+        "suchprotokoll",
+        "originalquellen",
+        "gegenbelege",
+        "unsicherheiten"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "artefakt_id",
+    "projekt_id",
+    "version",
+    "datum",
+    "autor",
+    "status",
+    "eingaben",
+    "quellen",
+    "offene_punkte",
+    "gesperrt",
+    "sperrgrund",
+    "beispiel",
+    "inhalt"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "gesperrt": {
+            "const": true
+          }
+        },
+        "required": [
+          "gesperrt"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sperrgrund": {
+            "$ref": "#/$defs/text"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "sperrgrund": {
+            "const": ""
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "beleg": {
+      "type": "object",
+      "properties": {
+        "quelle_id": {
+          "$ref": "#/$defs/identifikator"
+        },
+        "fundstelle": {
+          "$ref": "#/$defs/text"
+        }
+      },
+      "required": [
+        "quelle_id",
+        "fundstelle"
+      ],
+      "additionalProperties": false,
+      "description": "Konkrete Fundstelle in einer geöffneten Originalquelle; Quellenreferenzen prüft der Crosscheck."
+    },
+    "eingabe": {
+      "type": "object",
+      "properties": {
+        "artefakt_id": {
+          "type": "string",
+          "pattern": "^A(?:0[1-9]|1[0-2])$"
+        },
+        "version": {
+          "$ref": "#/$defs/semver"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "required": [
+        "artefakt_id",
+        "version",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "id_liste": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/identifikator"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "identifikator": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "iso_datum": {
+      "type": "string",
+      "anyOf": [
+        {
+          "format": "date",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        {
+          "format": "date-time",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T"
+        }
+      ],
+      "description": "ISO-8601-Datum oder RFC-3339-Zeitpunkt mit Zeitzone."
+    },
+    "iso_datum_oder_null": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/iso_datum"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "klinische_parameter": {
+      "type": "object",
+      "properties": {
+        "population": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S",
+          "description": "Aus der tatsächlichen Quelle übernehmen. Wenn nicht anwendbar: n/a mit konkreter Begründung; keine Werte ergänzen.",
+          "not": {
+            "pattern": "^\\s*[Nn]/[Aa]\\s*$"
+          }
+        },
+        "design": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S",
+          "description": "Aus der tatsächlichen Quelle übernehmen. Wenn nicht anwendbar: n/a mit konkreter Begründung; keine Werte ergänzen.",
+          "not": {
+            "pattern": "^\\s*[Nn]/[Aa]\\s*$"
+          }
+        },
+        "vergleich": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S",
+          "description": "Aus der tatsächlichen Quelle übernehmen. Wenn nicht anwendbar: n/a mit konkreter Begründung; keine Werte ergänzen.",
+          "not": {
+            "pattern": "^\\s*[Nn]/[Aa]\\s*$"
+          }
+        },
+        "endpunkt": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S",
+          "description": "Aus der tatsächlichen Quelle übernehmen. Wenn nicht anwendbar: n/a mit konkreter Begründung; keine Werte ergänzen.",
+          "not": {
+            "pattern": "^\\s*[Nn]/[Aa]\\s*$"
+          }
+        },
+        "absolute_wirkung": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S",
+          "description": "Aus der tatsächlichen Quelle übernehmen. Wenn nicht anwendbar: n/a mit konkreter Begründung; keine Werte ergänzen.",
+          "not": {
+            "pattern": "^\\s*[Nn]/[Aa]\\s*$"
+          }
+        },
+        "relative_wirkung": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S",
+          "description": "Aus der tatsächlichen Quelle übernehmen. Wenn nicht anwendbar: n/a mit konkreter Begründung; keine Werte ergänzen.",
+          "not": {
+            "pattern": "^\\s*[Nn]/[Aa]\\s*$"
+          }
+        },
+        "unsicherheit": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S",
+          "description": "Aus der tatsächlichen Quelle übernehmen. Wenn nicht anwendbar: n/a mit konkreter Begründung; keine Werte ergänzen.",
+          "not": {
+            "pattern": "^\\s*[Nn]/[Aa]\\s*$"
+          }
+        },
+        "interessenkonflikte": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S",
+          "description": "Aus der tatsächlichen Quelle übernehmen. Wenn nicht anwendbar: n/a mit konkreter Begründung; keine Werte ergänzen.",
+          "not": {
+            "pattern": "^\\s*[Nn]/[Aa]\\s*$"
+          }
+        },
+        "gueltigkeitsgrenzen": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S",
+          "description": "Aus der tatsächlichen Quelle übernehmen. Wenn nicht anwendbar: n/a mit konkreter Begründung; keine Werte ergänzen.",
+          "not": {
+            "pattern": "^\\s*[Nn]/[Aa]\\s*$"
+          }
+        }
+      },
+      "required": [
+        "population",
+        "design",
+        "vergleich",
+        "endpunkt",
+        "absolute_wirkung",
+        "relative_wirkung",
+        "unsicherheit",
+        "interessenkonflikte",
+        "gueltigkeitsgrenzen"
+      ],
+      "additionalProperties": false
+    },
+    "quelle": {
+      "type": "object",
+      "properties": {
+        "quelle_id": {
+          "$ref": "#/$defs/identifikator"
+        },
+        "url": {
+          "$ref": "#/$defs/url_oder_leer"
+        },
+        "titel": {
+          "$ref": "#/$defs/text"
+        },
+        "typ": {
+          "enum": [
+            "originalstudie",
+            "systematische_uebersicht",
+            "metaanalyse",
+            "leitlinie",
+            "behoerde",
+            "fachgesellschaft",
+            "rechtstext",
+            "rechtsprechung",
+            "register",
+            "primaerquelle",
+            "sonstiges",
+            "unbestimmt"
+          ]
+        },
+        "zugriff": {
+          "enum": [
+            "geprüft",
+            "nicht_geprueft"
+          ]
+        },
+        "geoeffnet_am": {
+          "$ref": "#/$defs/iso_datum_oder_null"
+        },
+        "fundstellen": {
+          "$ref": "#/$defs/text_liste"
+        },
+        "lokaler_pfad": {
+          "type": "string"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256_oder_leer"
+        },
+        "parameter": {
+          "$ref": "#/$defs/klinische_parameter"
+        }
+      },
+      "required": [
+        "quelle_id",
+        "url",
+        "titel",
+        "typ",
+        "zugriff",
+        "geoeffnet_am",
+        "fundstellen",
+        "lokaler_pfad",
+        "sha256",
+        "parameter"
+      ],
+      "additionalProperties": false,
+      "description": "Rechercheprotokoll. geprüft bezeichnet einen tatsächlich geöffneten Inhalt; URL allein genügt nicht.",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "zugriff": {
+                "const": "geprüft"
+              }
+            },
+            "required": [
+              "zugriff"
+            ]
+          },
+          "then": {
+            "properties": {
+              "geoeffnet_am": {
+                "$ref": "#/$defs/iso_datum"
+              },
+              "fundstellen": {
+                "minItems": 1
+              },
+              "typ": {
+                "not": {
+                  "const": "unbestimmt"
+                }
+              }
+            },
+            "anyOf": [
+              {
+                "properties": {
+                  "url": {
+                    "minLength": 1
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "lokaler_pfad": {
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 der tatsächlichen Datei, 64 kleingeschriebene Hexzeichen."
+    },
+    "sha256_oder_leer": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/sha256"
+        },
+        {
+          "const": ""
+        }
+      ],
+      "description": "Im Entwurf leer, bis die tatsächliche Datei vorliegt; niemals einen Hash erfinden."
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "text_liste": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/text"
+      },
+      "minItems": 0
+    },
+    "url_oder_leer": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://"
+        },
+        {
+          "const": ""
+        }
+      ]
+    }
+  }
+}

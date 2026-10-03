@@ -1,0 +1,61 @@
+{
+  "artefakt_id": "A03",
+  "projekt_id": "MA-20261003-001",
+  "version": "0.1.0",
+  "datum": "2026-10-03",
+  "autor": "[Verantwortliche Person eintragen.]",
+  "status": "Entwurf",
+  "eingaben": [],
+  "quellen": [],
+  "offene_punkte": [
+    "Beispielvorlage vollständig bearbeiten; fehlende Nachweise sind keine Freigabe."
+  ],
+  "gesperrt": false,
+  "sperrgrund": "",
+  "beispiel": true,
+  "inhalt": {
+    "faktenmatrix": [
+      {
+        "claim_id": "C-PLACEHOLDER",
+        "beobachtung": "Beispielplatzhalter ohne Quellenbeleg."
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "C-PLACEHOLDER",
+        "aussage": "[Medizinische Aussage anhand tatsächlicher Quellen formulieren.]",
+        "status": "UNBEWIESEN",
+        "einsatz": "nein",
+        "belege": [],
+        "gegenbelege": [],
+        "einschraenkungen": [
+          "Keine Aussage verwenden, bevor ihre Gültigkeit und Grenzen geklärt sind."
+        ],
+        "medizinisch": true,
+        "rechtsrelevant": false
+      }
+    ],
+    "quellenkatalog": [],
+    "risiken": [
+      {
+        "risiko_id": "R-PLACEHOLDER",
+        "beschreibung": "Ungeprüfter medizinischer Claim; Quellen- und fachlicher Review stehen aus.",
+        "klasse": "K0",
+        "medizinischer_review": true,
+        "juristischer_review": false,
+        "zentral": true,
+        "offen": true,
+        "claim_ids": [
+          "C-PLACEHOLDER"
+        ]
+      }
+    ],
+    "psychologie_map": [
+      {
+        "mechanismus": "[Relevanten Aufmerksamkeits- oder Lernmechanismus benennen.]",
+        "beschreibung": "[Anwendung an der Zielgruppe beschreiben.]",
+        "grenzen": "Keine Angstverstärkung oder irreführende Gewissheit erzeugen."
+      }
+    ]
+  }
+}

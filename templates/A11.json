@@ -1,0 +1,37 @@
+{
+  "artefakt_id": "A11",
+  "projekt_id": "MA-20261003-001",
+  "version": "0.1.0",
+  "datum": "2026-10-03",
+  "autor": "[Verantwortliche Person eintragen.]",
+  "status": "Entwurf",
+  "eingaben": [],
+  "quellen": [],
+  "offene_punkte": [
+    "Beispielvorlage vollständig bearbeiten; fehlende Nachweise sind keine Freigabe."
+  ],
+  "gesperrt": false,
+  "sperrgrund": "",
+  "beispiel": true,
+  "inhalt": {
+    "final_sha256": "",
+    "video_id": "",
+    "url": "",
+    "sichtbarkeit": "private",
+    "veroeffentlicht_am": null,
+    "ki_kennzeichnung": {
+      "erforderlich": null,
+      "gesetzt": null,
+      "nachweis": ""
+    },
+    "zielgruppe": {
+      "fuer_kinder": null,
+      "begruendung": "Zielgruppenklassifizierung noch nicht an der realen Plattform geprüft."
+    },
+    "werbung": {
+      "enthaelt_bezahlte_werbung": null,
+      "kennzeichnung_gesetzt": null,
+      "details": "Werbe- und Kennzeichnungspflichten noch nicht geprüft."
+    }
+  }
+}

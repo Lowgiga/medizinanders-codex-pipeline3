@@ -1,0 +1,520 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://medizinanders.local/schemas/A03.schema.json",
+  "title": "MedizinAnders A03 – Faktenmatrix und Claims",
+  "description": "Self-contained JSON Schema 2020-12. Strukturelle Validierung ersetzt weder Quellenprüfung noch externe Gate-Freigabe.",
+  "type": "object",
+  "properties": {
+    "artefakt_id": {
+      "const": "A03"
+    },
+    "projekt_id": {
+      "type": "string",
+      "pattern": "^MA-[0-9]{8}-[0-9]{3}$"
+    },
+    "version": {
+      "$ref": "#/$defs/semver"
+    },
+    "datum": {
+      "$ref": "#/$defs/iso_datum"
+    },
+    "autor": {
+      "$ref": "#/$defs/text"
+    },
+    "status": {
+      "enum": [
+        "Entwurf",
+        "geprüft",
+        "freigegeben",
+        "produziert",
+        "veröffentlicht"
+      ],
+      "description": "Historischer Dateistatus; keine wirksame Gate-Freigabe oder Freigabevererbung."
+    },
+    "eingaben": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/eingabe"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "quellen": {
+      "$ref": "#/$defs/id_liste"
+    },
+    "offene_punkte": {
+      "$ref": "#/$defs/text_liste"
+    },
+    "gesperrt": {
+      "type": "boolean"
+    },
+    "sperrgrund": {
+      "type": "string"
+    },
+    "beispiel": {
+      "type": "boolean"
+    },
+    "inhalt": {
+      "type": "object",
+      "properties": {
+        "faktenmatrix": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "claim_id": {
+                "$ref": "#/$defs/identifikator"
+              },
+              "beobachtung": {
+                "$ref": "#/$defs/text"
+              }
+            },
+            "required": [
+              "claim_id",
+              "beobachtung"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/claim"
+          },
+          "minItems": 0
+        },
+        "quellenkatalog": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/quellenkatalog_eintrag"
+          },
+          "minItems": 0,
+          "uniqueItems": true,
+          "description": "Vom Orchestrator vor G2 aus A02 materialisierte Metadaten der tatsächlich in A03-Belegen referenzierten Quellen. Ermöglicht BETA Originalquellenangaben aus dem freigegebenen A03, ohne neue Claims oder lokale Pfade zu übertragen."
+        },
+        "risiken": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/risiko"
+          },
+          "minItems": 0
+        },
+        "psychologie_map": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "mechanismus": {
+                "$ref": "#/$defs/text"
+              },
+              "beschreibung": {
+                "$ref": "#/$defs/text"
+              },
+              "grenzen": {
+                "$ref": "#/$defs/text"
+              }
+            },
+            "required": [
+              "mechanismus",
+              "beschreibung",
+              "grenzen"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "faktenmatrix",
+        "claims",
+        "risiken",
+        "psychologie_map"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "artefakt_id",
+    "projekt_id",
+    "version",
+    "datum",
+    "autor",
+    "status",
+    "eingaben",
+    "quellen",
+    "offene_punkte",
+    "gesperrt",
+    "sperrgrund",
+    "beispiel",
+    "inhalt"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "gesperrt": {
+            "const": true
+          }
+        },
+        "required": [
+          "gesperrt"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sperrgrund": {
+            "$ref": "#/$defs/text"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "sperrgrund": {
+            "const": ""
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "beleg": {
+      "type": "object",
+      "properties": {
+        "quelle_id": {
+          "$ref": "#/$defs/identifikator"
+        },
+        "fundstelle": {
+          "$ref": "#/$defs/text"
+        }
+      },
+      "required": [
+        "quelle_id",
+        "fundstelle"
+      ],
+      "additionalProperties": false,
+      "description": "Konkrete Fundstelle in einer geöffneten Originalquelle; Quellenreferenzen prüft der Crosscheck."
+    },
+    "claim": {
+      "type": "object",
+      "properties": {
+        "claim_id": {
+          "$ref": "#/$defs/identifikator"
+        },
+        "aussage": {
+          "$ref": "#/$defs/text"
+        },
+        "status": {
+          "enum": [
+            "BESTÄTIGT",
+            "TEILWEISE",
+            "WIDERLEGT",
+            "UNBEWIESEN"
+          ]
+        },
+        "einsatz": {
+          "enum": [
+            "ja",
+            "nur_mit_einschraenkung",
+            "nein"
+          ]
+        },
+        "belege": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/beleg"
+          },
+          "minItems": 0
+        },
+        "gegenbelege": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/beleg"
+          },
+          "minItems": 0
+        },
+        "einschraenkungen": {
+          "$ref": "#/$defs/text_liste"
+        },
+        "medizinisch": {
+          "type": "boolean"
+        },
+        "rechtsrelevant": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "claim_id",
+        "aussage",
+        "status",
+        "einsatz",
+        "belege",
+        "gegenbelege",
+        "einschraenkungen",
+        "medizinisch",
+        "rechtsrelevant"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "WIDERLEGT",
+                  "UNBEWIESEN"
+                ]
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "einsatz": {
+                "const": "nein"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "BESTÄTIGT",
+                  "TEILWEISE"
+                ]
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "belege": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "TEILWEISE"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "einsatz": {
+                "enum": [
+                  "nur_mit_einschraenkung",
+                  "nein"
+                ]
+              },
+              "einschraenkungen": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "einsatz": {
+                "const": "nur_mit_einschraenkung"
+              }
+            },
+            "required": [
+              "einsatz"
+            ]
+          },
+          "then": {
+            "properties": {
+              "einschraenkungen": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "eingabe": {
+      "type": "object",
+      "properties": {
+        "artefakt_id": {
+          "type": "string",
+          "pattern": "^A(?:0[1-9]|1[0-2])$"
+        },
+        "version": {
+          "$ref": "#/$defs/semver"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "required": [
+        "artefakt_id",
+        "version",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "id_liste": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/identifikator"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "identifikator": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "iso_datum": {
+      "type": "string",
+      "anyOf": [
+        {
+          "format": "date",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        {
+          "format": "date-time",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T"
+        }
+      ],
+      "description": "ISO-8601-Datum oder RFC-3339-Zeitpunkt mit Zeitzone."
+    },
+    "quellenkatalog_eintrag": {
+      "type": "object",
+      "properties": {
+        "quelle_id": {
+          "$ref": "#/$defs/identifikator"
+        },
+        "url": {
+          "$ref": "#/$defs/url_oder_leer"
+        },
+        "titel": {
+          "$ref": "#/$defs/text"
+        },
+        "zugriff": {
+          "enum": [
+            "geprüft",
+            "nicht_geprueft"
+          ]
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256_oder_leer"
+        }
+      },
+      "required": [
+        "quelle_id",
+        "url",
+        "titel",
+        "zugriff",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "risiko": {
+      "type": "object",
+      "properties": {
+        "risiko_id": {
+          "$ref": "#/$defs/identifikator"
+        },
+        "beschreibung": {
+          "$ref": "#/$defs/text"
+        },
+        "klasse": {
+          "enum": [
+            "K0",
+            "K1",
+            "K2"
+          ],
+          "description": "K0: blockierend/inhaltlich kritisch; K1: vor Freigabe zu beheben; K2: kosmetisch."
+        },
+        "medizinischer_review": {
+          "type": "boolean"
+        },
+        "juristischer_review": {
+          "type": "boolean"
+        },
+        "zentral": {
+          "type": "boolean"
+        },
+        "offen": {
+          "type": "boolean"
+        },
+        "claim_ids": {
+          "$ref": "#/$defs/id_liste"
+        }
+      },
+      "required": [
+        "risiko_id",
+        "beschreibung",
+        "klasse",
+        "medizinischer_review",
+        "juristischer_review",
+        "zentral",
+        "offen",
+        "claim_ids"
+      ],
+      "additionalProperties": false
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 der tatsächlichen Datei, 64 kleingeschriebene Hexzeichen."
+    },
+    "sha256_oder_leer": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/sha256"
+        },
+        {
+          "const": ""
+        }
+      ],
+      "description": "Im Entwurf leer, bis die tatsächliche Datei vorliegt; niemals einen Hash erfinden."
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "text_liste": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/text"
+      },
+      "minItems": 0
+    },
+    "url_oder_leer": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://"
+        },
+        {
+          "const": ""
+        }
+      ]
+    }
+  }
+}

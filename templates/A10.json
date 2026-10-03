@@ -1,0 +1,36 @@
+{
+  "artefakt_id": "A10",
+  "projekt_id": "MA-20261003-001",
+  "version": "0.1.0",
+  "datum": "2026-10-03",
+  "autor": "[Verantwortliche Person eintragen.]",
+  "status": "Entwurf",
+  "eingaben": [],
+  "quellen": [],
+  "offene_punkte": [
+    "Beispielvorlage vollständig bearbeiten; fehlende Nachweise sind keine Freigabe."
+  ],
+  "gesperrt": false,
+  "sperrgrund": "",
+  "beispiel": true,
+  "inhalt": {
+    "datei_sha256": "",
+    "technischer_report": {
+      "status": "ausstehend",
+      "bericht_pfad": ""
+    },
+    "qa": {
+      "ergebnis": "pruefung_unvollstaendig",
+      "findings": [],
+      "pflichtpruefungen": [
+        {
+          "name": "Noch ausstehende vollständige Prüfung",
+          "status": "nicht_geprueft",
+          "nachweis": "",
+          "begruendung": "Beispielvorlage, keine reale Prüfung.",
+          "art": "menschlich"
+        }
+      ]
+    }
+  }
+}

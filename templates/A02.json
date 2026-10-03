@@ -1,0 +1,58 @@
+{
+  "artefakt_id": "A02",
+  "projekt_id": "MA-20261003-001",
+  "version": "0.1.0",
+  "datum": "2026-10-03",
+  "autor": "[Verantwortliche Person eintragen.]",
+  "status": "Entwurf",
+  "eingaben": [],
+  "quellen": [
+    "Q-PLACEHOLDER"
+  ],
+  "offene_punkte": [
+    "Beispielvorlage vollständig bearbeiten; fehlende Nachweise sind keine Freigabe."
+  ],
+  "gesperrt": false,
+  "sperrgrund": "",
+  "beispiel": true,
+  "inhalt": {
+    "suchprotokoll": [
+      {
+        "suchfrage": "[Suchfrage aus A01 übernehmen.]",
+        "werkzeug": "[Recherchewerkzeug eintragen.]",
+        "zeitpunkt": null,
+        "ergebnis": "Recherche noch nicht ausgeführt.",
+        "gegenbelege_gesucht": false,
+        "retraktionen_geprueft": false
+      }
+    ],
+    "originalquellen": [
+      {
+        "quelle_id": "Q-PLACEHOLDER",
+        "url": "",
+        "titel": "[Noch zu öffnende Originalquelle.]",
+        "typ": "unbestimmt",
+        "zugriff": "nicht_geprueft",
+        "geoeffnet_am": null,
+        "fundstellen": [],
+        "lokaler_pfad": "",
+        "sha256": "",
+        "parameter": {
+          "population": "Noch nicht aus einer geöffneten Originalquelle erhoben; vor Verwendung prüfen.",
+          "design": "Noch nicht aus einer geöffneten Originalquelle erhoben; vor Verwendung prüfen.",
+          "vergleich": "Noch nicht aus einer geöffneten Originalquelle erhoben; vor Verwendung prüfen.",
+          "endpunkt": "Noch nicht aus einer geöffneten Originalquelle erhoben; vor Verwendung prüfen.",
+          "absolute_wirkung": "Noch nicht aus einer geöffneten Originalquelle erhoben; vor Verwendung prüfen.",
+          "relative_wirkung": "Noch nicht aus einer geöffneten Originalquelle erhoben; vor Verwendung prüfen.",
+          "unsicherheit": "Noch nicht aus einer geöffneten Originalquelle erhoben; vor Verwendung prüfen.",
+          "interessenkonflikte": "Noch nicht aus einer geöffneten Originalquelle erhoben; vor Verwendung prüfen.",
+          "gueltigkeitsgrenzen": "Noch nicht aus einer geöffneten Originalquelle erhoben; vor Verwendung prüfen."
+        }
+      }
+    ],
+    "gegenbelege": [],
+    "unsicherheiten": [
+      "Quelle, Fundstellen, Gegenbelege und Retraktionen sind noch nicht geprüft."
+    ]
+  }
+}

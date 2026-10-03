@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "medizinanders-codex-pipeline"
+version = "1.0.0"
+description = "Lokale Codex-native Produktionspipeline mit menschlichen Freigaben"
+requires-python = ">=3.11"
+dependencies = ["jsonschema>=4.20,<5", "PyYAML>=6,<7", "Pillow>=10,<13"]
+
+[project.scripts]
+ma = "medizinanders.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.data-files]
+"share/medizinanders" = ["AGENTS.md"]
+"share/medizinanders/config" = ["config/*.yaml"]
+"share/medizinanders/agents" = ["agents/*.md"]
+"share/medizinanders/schemas" = ["schemas/*.json"]
+"share/medizinanders/templates" = ["templates/*.json"]
