@@ -12,4 +12,6 @@ Am 2026-10-03 in der bereitgestellten Unix-Umgebung:
 
 Der Betreiber hat anschließend ausdrücklich das bestehende öffentliche Ziel `Lowgiga/medizinanders-codex-pipeline3` vorgegeben. Dieses Ziel ersetzt für die konkrete Lieferung den anfänglichen Privat-Default. Der Inhalts- und Historiencheck bleibt vor jedem Push verpflichtend.
 
+Die vollständige Lieferung wurde anschließend über den tatsächlich schreibberechtigten GitHub-Connector und die Git-Data-REST-Schnittstelle übertragen. Der direkte Git-Smart-HTTP-Push wurde mit HTTP401 verweigert. Beide lokalen Implementierungscommits wurden als identische Git-Objekte mit unveränderten SHAs übertragen; eine Fast-Forward-kompatible Zusammenführung verband sie mit der zuvor angelegten README. Lokal und remote wurden Commit- und Treehashes erfolgreich abgeglichen. Vor der Übertragung bestanden der vollständige Historyscan und alle 178 lokalen Tests. Der GitHub-Actions-Status konnte wegen HTTP401 am Actions-Endpunkt nicht abgerufen werden; es wird kein remote CI-Ergebnis behauptet.
+
 Keine Produktionsfreigabe, Kostenannahme, Fachprüfung oder Veröffentlichung wurde während dieser Implementierung vorgenommen.
