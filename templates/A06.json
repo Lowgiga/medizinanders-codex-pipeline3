@@ -1,0 +1,176 @@
+{
+  "artefakt_id": "A06",
+  "projekt_id": "MA-20261003-001",
+  "version": "0.1.0",
+  "datum": "2026-10-03",
+  "autor": "[Verantwortliche Person eintragen.]",
+  "status": "Entwurf",
+  "eingaben": [],
+  "quellen": [],
+  "offene_punkte": [
+    "Beispielvorlage vollständig bearbeiten; fehlende Nachweise sind keine Freigabe."
+  ],
+  "gesperrt": false,
+  "sperrgrund": "",
+  "beispiel": true,
+  "inhalt": {
+    "szenen": [
+      {
+        "szene_id": "SC01",
+        "start": 0,
+        "ende": 3,
+        "sprechertext": "[hook: freigegebene Sätze aus A05 vollständig übernehmen.]",
+        "funktion": "hook",
+        "motiv": "[Illustratives Motiv beschreiben; keine Dokumentation eines realen Patienten behaupten.]",
+        "assetbedarf": [
+          "AS-PLACEHOLDER"
+        ],
+        "sync_anker": "[Konkretes Wort und passende Bildaktion eintragen.]",
+        "overlay": "[Nur belegtes Overlay eintragen.]",
+        "quellenhinweis": "",
+        "uebergang": "[Motivierten Übergang festlegen.]",
+        "audio": {
+          "musik": "[Optionale Musik mit geklärten Rechten auswählen.]",
+          "effekte": "",
+          "mischung": "Sprachverständlichkeit priorisieren; Lautheit und Peaks anhand tatsächlicher Messung prüfen."
+        },
+        "claim_ids": []
+      },
+      {
+        "szene_id": "SC02",
+        "start": 3,
+        "ende": 8,
+        "sprechertext": "[open_loop: freigegebene Sätze aus A05 vollständig übernehmen.]",
+        "funktion": "open_loop",
+        "motiv": "[Illustratives Motiv beschreiben; keine Dokumentation eines realen Patienten behaupten.]",
+        "assetbedarf": [
+          "AS-PLACEHOLDER"
+        ],
+        "sync_anker": "[Konkretes Wort und passende Bildaktion eintragen.]",
+        "overlay": "[Nur belegtes Overlay eintragen.]",
+        "quellenhinweis": "",
+        "uebergang": "harter Schnitt",
+        "audio": {
+          "musik": "[Optionale Musik mit geklärten Rechten auswählen.]",
+          "effekte": "",
+          "mischung": "Sprachverständlichkeit priorisieren; Lautheit und Peaks anhand tatsächlicher Messung prüfen."
+        },
+        "claim_ids": []
+      },
+      {
+        "szene_id": "SC03",
+        "start": 8,
+        "ende": 41,
+        "sprechertext": "[payload: freigegebene Sätze aus A05 vollständig übernehmen.]",
+        "funktion": "payload",
+        "motiv": "[Illustratives Motiv beschreiben; keine Dokumentation eines realen Patienten behaupten.]",
+        "assetbedarf": [
+          "AS-PLACEHOLDER"
+        ],
+        "sync_anker": "[Konkretes Wort und passende Bildaktion eintragen.]",
+        "overlay": "[Nur belegtes Overlay eintragen.]",
+        "quellenhinweis": "",
+        "uebergang": "[Motivierten Übergang festlegen.]",
+        "audio": {
+          "musik": "[Optionale Musik mit geklärten Rechten auswählen.]",
+          "effekte": "",
+          "mischung": "Sprachverständlichkeit priorisieren; Lautheit und Peaks anhand tatsächlicher Messung prüfen."
+        },
+        "claim_ids": []
+      },
+      {
+        "szene_id": "SC04",
+        "start": 41,
+        "ende": 48,
+        "sprechertext": "[verdichtung: freigegebene Sätze aus A05 vollständig übernehmen.]",
+        "funktion": "verdichtung",
+        "motiv": "[Illustratives Motiv beschreiben; keine Dokumentation eines realen Patienten behaupten.]",
+        "assetbedarf": [
+          "AS-PLACEHOLDER"
+        ],
+        "sync_anker": "[Konkretes Wort und passende Bildaktion eintragen.]",
+        "overlay": "[Nur belegtes Overlay eintragen.]",
+        "quellenhinweis": "",
+        "uebergang": "[Motivierten Übergang festlegen.]",
+        "audio": {
+          "musik": "[Optionale Musik mit geklärten Rechten auswählen.]",
+          "effekte": "",
+          "mischung": "Sprachverständlichkeit priorisieren; Lautheit und Peaks anhand tatsächlicher Messung prüfen."
+        },
+        "claim_ids": []
+      },
+      {
+        "szene_id": "SC05",
+        "start": 48,
+        "ende": 52,
+        "sprechertext": "[cta: freigegebene Sätze aus A05 vollständig übernehmen.]",
+        "funktion": "cta",
+        "motiv": "[Illustratives Motiv beschreiben; keine Dokumentation eines realen Patienten behaupten.]",
+        "assetbedarf": [
+          "AS-PLACEHOLDER"
+        ],
+        "sync_anker": "[Konkretes Wort und passende Bildaktion eintragen.]",
+        "overlay": "[Nur belegtes Overlay eintragen.]",
+        "quellenhinweis": "",
+        "uebergang": "[Motivierten Übergang festlegen.]",
+        "audio": {
+          "musik": "[Optionale Musik mit geklärten Rechten auswählen.]",
+          "effekte": "",
+          "mischung": "Sprachverständlichkeit priorisieren; Lautheit und Peaks anhand tatsächlicher Messung prüfen."
+        },
+        "claim_ids": []
+      },
+      {
+        "szene_id": "SC06",
+        "start": 52,
+        "ende": 54,
+        "sprechertext": "[ausklang: freigegebene Sätze aus A05 vollständig übernehmen.]",
+        "funktion": "ausklang",
+        "motiv": "[Illustratives Motiv beschreiben; keine Dokumentation eines realen Patienten behaupten.]",
+        "assetbedarf": [
+          "AS-PLACEHOLDER"
+        ],
+        "sync_anker": "[Konkretes Wort und passende Bildaktion eintragen.]",
+        "overlay": "[Nur belegtes Overlay eintragen.]",
+        "quellenhinweis": "",
+        "uebergang": "[Motivierten Übergang festlegen.]",
+        "audio": {
+          "musik": "[Optionale Musik mit geklärten Rechten auswählen.]",
+          "effekte": "",
+          "mischung": "Sprachverständlichkeit priorisieren; Lautheit und Peaks anhand tatsächlicher Messung prüfen."
+        },
+        "claim_ids": []
+      },
+      {
+        "szene_id": "SC07",
+        "start": 54,
+        "ende": 58,
+        "sprechertext": "",
+        "funktion": "disclaimer",
+        "motiv": "schwarz",
+        "assetbedarf": [],
+        "sync_anker": "Bei 54,000 s exklusive Disclaimer-Endcard beginnen.",
+        "overlay": "Journalistischer Analyse-Content. Kein medizinischer Rat.",
+        "quellenhinweis": "",
+        "uebergang": "Ende bei 58,000 s",
+        "audio": {
+          "musik": "",
+          "effekte": "",
+          "mischung": "Vollständige Stille von 54,000 bis 58,000 s."
+        },
+        "claim_ids": []
+      }
+    ],
+    "assets": [
+      {
+        "asset_id": "AS-PLACEHOLDER",
+        "typ": "bild",
+        "beschreibung": "[Geplantes Asset beschreiben.]",
+        "rechte_status": "offen",
+        "rechte_beleg": "",
+        "ki_illustration": false
+      }
+    ],
+    "invideo_auftrag": "BEISPIELPLATZHALTER, KEINE PRODUKTIONSFREIGABE. Nach G3 den eigenständigen Handoff mit vollständigem freigegebenem Sprechertext, Laufzeit, Format, Szenen, Assets, Rechtebelegen, Overlays und Audiohinweisen ausfüllen. Vorher keine Produktion starten. Fehlende Angaben und ungeklärte Quellen melden. Verbindliches Profil: 58 Sekunden, 9:16, 1080×1920, 30 fps. Phasen 0–3 Hook, 3–8 Open Loop, 8–41 Payload, 41–48 Verdichtung, 48–52 genau eine CTA, 52–54 Ausklang, 54–58 exklusive stille schwarze Disclaimer-Endcard. Bei 3,000 s harter Schnitt. Disclaimer: Journalistischer Analyse-Content. Kein medizinischer Rat."
+  }
+}

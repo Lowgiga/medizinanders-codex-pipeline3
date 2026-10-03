@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ma_repo_dir="$(git rev-parse --show-toplevel)"
+python3 "$ma_repo_dir/scripts/check_repository.py" --staged

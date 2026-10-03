@@ -1,0 +1,28 @@
+# VORLAGE, KEINE FREIGABE. Niemals persönliche Produktionsdaten hier eintragen/committen.
+# ma setup schreibt die echte lokale Konfiguration nach MA_DATA_DIR/operator.yaml.
+verantwortliche_person: null
+umgebung: null
+datenschutz: null
+speicherort: null
+tools: []
+invideo_moeglichkeiten: null
+worker_mode: native_session
+web_recherche: false
+
+# Diese Ergänzungen sind eine Checkliste, keine bereits bestätigten Fähigkeiten.
+standardvorschlaege:
+  speicherort: '~/.local/share/medizinanders'
+  worker_mode: native_session
+  datenschutz: Nur öffentliche Gesundheitsinformationen; keine Patientendaten.
+  render: Genau ein manuell bestätigter InVideo-Entwurf je Produktionsrunde.
+  musik: Keine Musik, solange getrennte Spuren nicht zuverlässig geprüft werden können.
+offene_g0_entscheidungen:
+  - Wer übernimmt die reale redaktionelle Verantwortung und bestätigt Gates?
+  - Welche konkrete Codex-Umgebung bietet isolierte Worker und tatsächliche Webrecherche?
+  - Welche lokalen Pfade, Zugriffsrechte, Backups und Löschregeln werden genutzt?
+  - Welche Datenschutzregeln gelten für Quellen, Uploads und externe Dienste?
+  - Wurden die Rollenprompts und Kanalregeln durch den Betreiber gelesen und akzeptiert?
+  - Welche FFmpeg-/ffprobe-/Schriftwerkzeuge sind wirklich installiert?
+  - Was kann das tatsächliche InVideo-Konto exportieren, welche Kosten entstehen und wer akzeptiert sie?
+  - Welche echte medizinische bzw. juristische Fachperson ist bei einer Eskalation erreichbar?
+  - Wie werden Bild-/Musik-/Stimmrechte belegt und KI-Kennzeichnung/Zielgruppe/Werbung entschieden?

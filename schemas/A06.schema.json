@@ -1,0 +1,415 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://medizinanders.local/schemas/A06.schema.json",
+  "title": "MedizinAnders A06 – Storyboard, Assets und InVideo-Auftrag",
+  "description": "Self-contained JSON Schema 2020-12. Strukturelle Validierung ersetzt weder Quellenprüfung noch externe Gate-Freigabe.",
+  "type": "object",
+  "properties": {
+    "artefakt_id": {
+      "const": "A06"
+    },
+    "projekt_id": {
+      "type": "string",
+      "pattern": "^MA-[0-9]{8}-[0-9]{3}$"
+    },
+    "version": {
+      "$ref": "#/$defs/semver"
+    },
+    "datum": {
+      "$ref": "#/$defs/iso_datum"
+    },
+    "autor": {
+      "$ref": "#/$defs/text"
+    },
+    "status": {
+      "enum": [
+        "Entwurf",
+        "geprüft",
+        "freigegeben",
+        "produziert",
+        "veröffentlicht"
+      ],
+      "description": "Historischer Dateistatus; keine wirksame Gate-Freigabe oder Freigabevererbung."
+    },
+    "eingaben": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/eingabe"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "quellen": {
+      "$ref": "#/$defs/id_liste"
+    },
+    "offene_punkte": {
+      "$ref": "#/$defs/text_liste"
+    },
+    "gesperrt": {
+      "type": "boolean"
+    },
+    "sperrgrund": {
+      "type": "string"
+    },
+    "beispiel": {
+      "type": "boolean"
+    },
+    "inhalt": {
+      "type": "object",
+      "properties": {
+        "szenen": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "szene_id": {
+                "$ref": "#/$defs/identifikator"
+              },
+              "start": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 58
+              },
+              "ende": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 58
+              },
+              "sprechertext": {
+                "type": "string",
+                "description": "Im exklusiven Disclaimer-Endcard leer; sonst freigegebener Sprechertext aus A05."
+              },
+              "funktion": {
+                "enum": [
+                  "hook",
+                  "open_loop",
+                  "payload",
+                  "verdichtung",
+                  "cta",
+                  "ausklang",
+                  "disclaimer"
+                ]
+              },
+              "motiv": {
+                "$ref": "#/$defs/text"
+              },
+              "assetbedarf": {
+                "$ref": "#/$defs/id_liste"
+              },
+              "sync_anker": {
+                "$ref": "#/$defs/text"
+              },
+              "overlay": {
+                "type": "string"
+              },
+              "quellenhinweis": {
+                "type": "string"
+              },
+              "uebergang": {
+                "$ref": "#/$defs/text"
+              },
+              "audio": {
+                "type": "object",
+                "properties": {
+                  "musik": {
+                    "type": "string"
+                  },
+                  "effekte": {
+                    "type": "string"
+                  },
+                  "mischung": {
+                    "$ref": "#/$defs/text"
+                  }
+                },
+                "required": [
+                  "musik",
+                  "effekte",
+                  "mischung"
+                ],
+                "additionalProperties": false
+              },
+              "claim_ids": {
+                "$ref": "#/$defs/id_liste"
+              }
+            },
+            "required": [
+              "szene_id",
+              "start",
+              "ende",
+              "sprechertext",
+              "funktion",
+              "motiv",
+              "assetbedarf",
+              "sync_anker",
+              "overlay",
+              "quellenhinweis",
+              "uebergang",
+              "audio",
+              "claim_ids"
+            ],
+            "additionalProperties": false,
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "funktion": {
+                      "const": "disclaimer"
+                    }
+                  },
+                  "required": [
+                    "funktion"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "start": {
+                      "const": 54
+                    },
+                    "ende": {
+                      "const": 58
+                    },
+                    "sprechertext": {
+                      "const": ""
+                    },
+                    "motiv": {
+                      "enum": [
+                        "schwarz",
+                        "schwarzer hintergrund"
+                      ]
+                    },
+                    "overlay": {
+                      "const": "Journalistischer Analyse-Content. Kein medizinischer Rat."
+                    },
+                    "claim_ids": {
+                      "maxItems": 0
+                    },
+                    "audio": {
+                      "properties": {
+                        "musik": {
+                          "enum": [
+                            "",
+                            "keine"
+                          ]
+                        },
+                        "effekte": {
+                          "enum": [
+                            "",
+                            "keine"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "minItems": 1
+        },
+        "assets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/asset"
+          },
+          "minItems": 0
+        },
+        "invideo_auftrag": {
+          "type": "string",
+          "minLength": 80,
+          "pattern": "\\S",
+          "description": "Eigenständiger, ausführbarer Produktionsauftrag; Freigabe und vollständige Inputs kommen aus dem Handoff."
+        }
+      },
+      "required": [
+        "szenen",
+        "assets",
+        "invideo_auftrag"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "artefakt_id",
+    "projekt_id",
+    "version",
+    "datum",
+    "autor",
+    "status",
+    "eingaben",
+    "quellen",
+    "offene_punkte",
+    "gesperrt",
+    "sperrgrund",
+    "beispiel",
+    "inhalt"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "gesperrt": {
+            "const": true
+          }
+        },
+        "required": [
+          "gesperrt"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sperrgrund": {
+            "$ref": "#/$defs/text"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "sperrgrund": {
+            "const": ""
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "properties": {
+        "asset_id": {
+          "$ref": "#/$defs/identifikator"
+        },
+        "typ": {
+          "enum": [
+            "video",
+            "bild",
+            "grafik",
+            "animation",
+            "audio",
+            "musik",
+            "schrift",
+            "logo",
+            "sonstiges"
+          ]
+        },
+        "beschreibung": {
+          "$ref": "#/$defs/text"
+        },
+        "rechte_status": {
+          "enum": [
+            "geklaert",
+            "offen"
+          ]
+        },
+        "rechte_beleg": {
+          "type": "string"
+        },
+        "ki_illustration": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "asset_id",
+        "typ",
+        "beschreibung",
+        "rechte_status",
+        "rechte_beleg",
+        "ki_illustration"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "rechte_status": {
+                "const": "geklaert"
+              }
+            },
+            "required": [
+              "rechte_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "rechte_beleg": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "eingabe": {
+      "type": "object",
+      "properties": {
+        "artefakt_id": {
+          "type": "string",
+          "pattern": "^A(?:0[1-9]|1[0-2])$"
+        },
+        "version": {
+          "$ref": "#/$defs/semver"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "required": [
+        "artefakt_id",
+        "version",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "id_liste": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/identifikator"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "identifikator": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "iso_datum": {
+      "type": "string",
+      "anyOf": [
+        {
+          "format": "date",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        {
+          "format": "date-time",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T"
+        }
+      ],
+      "description": "ISO-8601-Datum oder RFC-3339-Zeitpunkt mit Zeitzone."
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 der tatsächlichen Datei, 64 kleingeschriebene Hexzeichen."
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "text_liste": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/text"
+      },
+      "minItems": 0
+    }
+  }
+}

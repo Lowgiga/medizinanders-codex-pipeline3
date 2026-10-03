@@ -1,0 +1,19 @@
+name: Tests und Repository-Sicherheit
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core
+      - run: python -m pip install -e .
+      - run: python scripts/check_repository.py --history
+      - run: python -m unittest discover -s tests -v
+      - run: ma demo --data-dir /tmp/medizinanders-ci-demo

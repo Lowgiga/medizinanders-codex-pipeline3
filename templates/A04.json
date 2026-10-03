@@ -1,0 +1,77 @@
+{
+  "artefakt_id": "A04",
+  "projekt_id": "MA-20261003-001",
+  "version": "0.1.0",
+  "datum": "2026-10-03",
+  "autor": "[Verantwortliche Person eintragen.]",
+  "status": "Entwurf",
+  "eingaben": [],
+  "quellen": [],
+  "offene_punkte": [
+    "Beispielvorlage vollständig bearbeiten; fehlende Nachweise sind keine Freigabe."
+  ],
+  "gesperrt": false,
+  "sperrgrund": "",
+  "beispiel": true,
+  "inhalt": {
+    "profil": "MA-SHORT-58-v1.0",
+    "dramaturgie": [
+      {
+        "beat_id": "B01",
+        "funktion": "hook",
+        "start": 0,
+        "ende": 3,
+        "kernpunkt": "[hook: dramaturgischen Kernpunkt nach Claim-Prüfung eintragen.]",
+        "claim_ids": []
+      },
+      {
+        "beat_id": "B02",
+        "funktion": "open_loop",
+        "start": 3,
+        "ende": 8,
+        "kernpunkt": "[open_loop: dramaturgischen Kernpunkt nach Claim-Prüfung eintragen.]",
+        "claim_ids": []
+      },
+      {
+        "beat_id": "B03",
+        "funktion": "payload",
+        "start": 8,
+        "ende": 41,
+        "kernpunkt": "[payload: dramaturgischen Kernpunkt nach Claim-Prüfung eintragen.]",
+        "claim_ids": []
+      },
+      {
+        "beat_id": "B04",
+        "funktion": "verdichtung",
+        "start": 41,
+        "ende": 48,
+        "kernpunkt": "[verdichtung: dramaturgischen Kernpunkt nach Claim-Prüfung eintragen.]",
+        "claim_ids": []
+      },
+      {
+        "beat_id": "B05",
+        "funktion": "cta",
+        "start": 48,
+        "ende": 52,
+        "kernpunkt": "[cta: dramaturgischen Kernpunkt nach Claim-Prüfung eintragen.]",
+        "claim_ids": []
+      },
+      {
+        "beat_id": "B06",
+        "funktion": "ausklang",
+        "start": 52,
+        "ende": 54,
+        "kernpunkt": "[ausklang: dramaturgischen Kernpunkt nach Claim-Prüfung eintragen.]",
+        "claim_ids": []
+      },
+      {
+        "beat_id": "B07",
+        "funktion": "disclaimer",
+        "start": 54,
+        "ende": 58,
+        "kernpunkt": "Journalistischer Analyse-Content. Kein medizinischer Rat.",
+        "claim_ids": []
+      }
+    ]
+  }
+}
